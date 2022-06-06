@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
-import Navigation from "./components/routes/navigation/Navigation.component";
-import Home from "./components/routes/home/Home.component";
-
+import Navigation from "./routes/navigation/Navigation.component";
+import Home from "./routes/home/Home.component";
+import SignIn from "./routes/sign-in/Sign-in.component";
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route index path="/" element={<Home />} />
+        <Route index element={<Home />} />
+        <Route path="sign-in" element={<SignIn />} />
       </Route>
     </Routes>
   );
