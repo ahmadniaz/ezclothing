@@ -1,11 +1,17 @@
 import { useState } from "react";
 
+import {
+  createAuthUserFromEmailandPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/Firebase.utils";
+
 const formFields = {
   dislayName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
+
 const SignupForm = () => {
   const [fieldsValue, setFieldsValue] = useState(formFields);
   const { displayName, email, password, confirmPassword } = fieldsValue;
@@ -13,11 +19,32 @@ const SignupForm = () => {
   console.log(fieldsValue);
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFieldsValue({ ...formFields, [name]: value });
+    setFieldsValue({ ...fieldsValue, [name]: value });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("passwords does not match");
+      return;
+    }
+
+    try {
+      const { user } = await createAuthUserFromEmailandPassword(
+        email,
+        password
+      );
+
+      await createUserDocumentFromAuth(user, { displayName });
+    } catch (error) {
+      console.log("unable to create user", error);
+    }
+  };
+
   return (
     <div>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <lablel>Display Name</lablel>
         <input
           type="text"
