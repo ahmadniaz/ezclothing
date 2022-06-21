@@ -5,8 +5,13 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/Firebase.utils";
 
+import "./signup-form.styles.scss";
+
+import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
+
 const formFields = {
-  dislayName: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -16,7 +21,6 @@ const SignupForm = () => {
   const [fieldsValue, setFieldsValue] = useState(formFields);
   const { displayName, email, password, confirmPassword } = fieldsValue;
 
-  console.log(fieldsValue);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFieldsValue({ ...fieldsValue, [name]: value });
@@ -43,10 +47,11 @@ const SignupForm = () => {
   };
 
   return (
-    <div>
+    <div className="signup-form-container">
+      <h2>Don't have an account yet?</h2>
       <form onSubmit={handleSubmit}>
-        <lablel>Display Name</lablel>
-        <input
+        <FormInput
+          label="Display Name"
           type="text"
           required
           onChange={handleChange}
@@ -54,8 +59,8 @@ const SignupForm = () => {
           value={displayName}
         />
 
-        <lablel>Email</lablel>
-        <input
+        <FormInput
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -63,8 +68,8 @@ const SignupForm = () => {
           value={email}
         />
 
-        <lablel>Password</lablel>
-        <input
+        <FormInput
+          label="Password"
           type="password"
           required
           onChange={handleChange}
@@ -72,8 +77,8 @@ const SignupForm = () => {
           value={password}
         />
 
-        <lablel>Confirm Password</lablel>
-        <input
+        <FormInput
+          label="Confirm Password"
           type="password"
           required
           onChange={handleChange}
@@ -81,7 +86,7 @@ const SignupForm = () => {
           value={confirmPassword}
         />
       </form>
-      <button type="submit">Sign-Up</button>
+      <Button type="submit">Sign-Up</Button>
     </div>
   );
 };

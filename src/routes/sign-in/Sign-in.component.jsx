@@ -12,7 +12,6 @@ const SignIn = () => {
   useEffect(() => {
     const redirectResult = async () => {
       const response = await getRedirectResult(auth);
-      console.log(response);
       if (response) {
         const userDocRef = createUserDocumentFromAuth(response.user);
       }
@@ -22,7 +21,6 @@ const SignIn = () => {
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     const userDocRef = createUserDocumentFromAuth(user);
-    console.log(user);
   };
   return (
     <div>
