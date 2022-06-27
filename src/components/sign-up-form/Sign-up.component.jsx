@@ -10,7 +10,7 @@ import "./sign-up-form.styles.scss";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-const formFields = {
+const defaultFieldsValue = {
   displayName: "",
   email: "",
   password: "",
@@ -18,7 +18,7 @@ const formFields = {
 };
 
 const SignupForm = () => {
-  const [fieldsValue, setFieldsValue] = useState(formFields);
+  const [fieldsValue, setFieldsValue] = useState(defaultFieldsValue);
   const { displayName, email, password, confirmPassword } = fieldsValue;
 
   const handleChange = (event) => {
@@ -41,7 +41,11 @@ const SignupForm = () => {
       );
 
       await createUserDocumentFromAuth(user, { displayName });
+      setFieldsValue(defaultFieldsValue);
     } catch (error) {
+      if (error.code === "auth/invalid-email") {
+        alert("Invalid Email");
+      }
       console.log("unable to create user", error);
     }
   };
@@ -49,6 +53,7 @@ const SignupForm = () => {
   return (
     <div className="signup-form-container">
       <h2>Don't have an account yet?</h2>
+
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
@@ -85,8 +90,8 @@ const SignupForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
+        <Button type="submit">Sign-Up</Button>
       </form>
-      <Button type="submit">Sign-Up</Button>
     </div>
   );
 };

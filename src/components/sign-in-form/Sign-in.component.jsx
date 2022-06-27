@@ -11,13 +11,13 @@ import "./sign-in-form.styles.scss";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-const formFields = {
+const defaultFieldsValue = {
   email: "",
   password: "",
 };
 
 const SignInForm = () => {
-  const [fieldsValue, setFieldsValue] = useState(formFields);
+  const [fieldsValue, setFieldsValue] = useState(defaultFieldsValue);
   const { email, password } = fieldsValue;
 
   const handleChange = (event) => {
@@ -34,7 +34,19 @@ const SignInForm = () => {
         password
       );
       console.log(response);
-    } catch (error) {}
+      setFieldsValue(defaultFieldsValue);
+    } catch (error) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Incorrect password");
+          break;
+        case "auth/user-not-found":
+          alert("User does not found. Please signup first to Login");
+          break;
+        default:
+          break;
+      }
+    }
   };
 
   const signInWithGoogle = async () => {
@@ -65,8 +77,8 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign-In</Button>
-          <Button buttonType="google" onClick={signInWithGoogle}>
-            signInWithGoogle
+          <Button buttonType="google" type="button" onClick={signInWithGoogle}>
+            sign In With Google
           </Button>
         </div>
       </form>
