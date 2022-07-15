@@ -2,7 +2,15 @@ import { useContext } from "react";
 
 import { CartContext } from "../../contexts/cart.context";
 
-import "./checkout-item.styles.scss";
+import {
+  CheckoutItemContainer,
+  CheckoutImageContainer,
+  CheckoutSpan,
+  QuantitySpan,
+  ArrowDiv,
+  ValueSpan,
+  RemoveButton,
+} from "./checkout-item.styles";
 
 const CheckoutItem = ({ cartItem }) => {
   const { removeItemFromCheckout, addItemToCart, removeItemFromCart } =
@@ -16,25 +24,19 @@ const CheckoutItem = ({ cartItem }) => {
   const handleAddItem = () => addItemToCart(cartItem);
 
   return (
-    <div className="checkout-item-container">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <CheckoutImageContainer>
         <img src={imageUrl} alt={`${name}`} />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={handleRemoveItem}>
-          &#10094;
-        </div>
-        <span className="value">{quantity}</span>
-        <div className="arrow" onClick={handleAddItem}>
-          &#10095;
-        </div>
-      </span>
-      <span className="price">{price}</span>
-      <span className="remove-button" onClick={handleClearItem}>
-        &#10005;
-      </span>
-    </div>
+      </CheckoutImageContainer>
+      <CheckoutSpan>{name}</CheckoutSpan>
+      <QuantitySpan>
+        <ArrowDiv onClick={handleRemoveItem}>&#10094;</ArrowDiv>
+        <ValueSpan>{quantity}</ValueSpan>
+        <ArrowDiv onClick={handleAddItem}>&#10095;</ArrowDiv>
+      </QuantitySpan>
+      <CheckoutSpan>{price}</CheckoutSpan>
+      <RemoveButton onClick={handleClearItem}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 
