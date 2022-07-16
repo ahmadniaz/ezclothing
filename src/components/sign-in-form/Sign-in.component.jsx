@@ -36,6 +36,7 @@ const SignInForm = () => {
         email,
         password
       );
+      console.log(user)
 
       setFieldsValue(defaultFieldsValue);
     } catch (error) {
