@@ -9,7 +9,7 @@ import {
   CartDropdownContainer,
   CartItemsDiv,
   EmptyMessage,
-} from "./cart-dropdown.styles.jsx";
+} from "./cart-dropdown.styles";
 
 const CartDropdown = () => {
   const navigate = useNavigate();

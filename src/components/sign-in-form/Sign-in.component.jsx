@@ -9,7 +9,7 @@ import {
   SigninContainer,
   SigninHeading,
   ButtonContainer,
-} from "./sign-in-form.styles.jsx";
+} from "./sign-in-form.styles";
 
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
@@ -36,7 +36,7 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(user)
+      console.log(user);
 
       setFieldsValue(defaultFieldsValue);
     } catch (error) {
