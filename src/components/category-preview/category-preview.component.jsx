@@ -5,6 +5,7 @@ import {
   CategoryPreviewContainer,
   CategoryPreviewTitle,
   CategoryPreviewDiv,
+  ViewAllSpan,
 } from "./category-preview.styles";
 const CategoryPreview = ({ title, products }) => {
   return (
@@ -22,6 +23,9 @@ const CategoryPreview = ({ title, products }) => {
             <ProductCard key={products} product={product} />
           ))}
       </CategoryPreviewDiv>
+      <Link to={`${title}`}>
+        <ViewAllSpan>VIEW ALL</ViewAllSpan>
+      </Link>
     </CategoryPreviewContainer>
   );
 };
